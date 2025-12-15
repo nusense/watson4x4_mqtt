@@ -10,14 +10,18 @@ This project was realized, during the early COVID shutdown,  as a pair of boxes 
 ---
 
 ### state machine
-| off   | --> | push     | --> | on (steady) | '1' |
-| off   | --> | double   | --> | slow blink  | 'S' |
-| off   | --> | triple   | --> | fast blink  | 'F' |
-| off   | --> | long     | --> | breathe     | 'B' |
-| ! off | --> | any push | --> | off         | '0' |
+| init  |       | action   |       | yields      | mqtt state |
+| ----- | :---: | -------- | :---: | ----------- | ---------- |
+| off   | -->   | push     | -->   | on (steady) | '1' |
+| off   | -->   | double   | -->   | slow blink  | 'S' |
+| off   | -->   | triple   | -->   | fast blink  | 'F' |
+| off   | -->   | long     | -->   | breathe     | 'B' |
+| ! off | -->   | any push | -->   | off         | '0' |
 (other possible state 'X' super fast blink, but not settable by button)
  
 State is kept via MQTT communication and retained messages
+| topic                                  | box read/write | value |
+| -------------------------------------- | ------- | ----- |
 | rhatcher/watson/state                  | RW | 'XXXX" |
 | rhatcher/watson/Watson-MAC4            | -W | "client connected" or "client disconnected" |
 | rhatcher/watson/Watson-MAC4/brightness | R- | <b1> <b2> <b3> <b4>   # values between 2 - 255 |

@@ -26,6 +26,6 @@ State is kept via MQTT communication and retained messages
 
 | topic                                  | box read/write | value |
 | -------------------------------------- | ------- | ----- |
-| rhatcher/watson/state                  | RW | "xxxx" |
+| rhatcher/watson/state                  | RW | [LED1][LED2][LED3][LED4] |
 | rhatcher/watson/Watson-MAC4            |  W | "client connected" or "client disconnected" |
 | rhatcher/watson/Watson-MAC4/brightness | R | <b1> <b2> <b3> <b4>   # values between 2 - 255 |

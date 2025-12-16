@@ -1,7 +1,8 @@
 In this case both watson boxes are running on the same network
 as is a beaglebone microcomputer (as beaglebone0.local)
 
-The beaglebone has the "mosquitto" MQTT broker installed (via apt-get install mosquitto)
+The beaglebone has the "mosquitto" MQTT broker installed
+(via apt-get install mosquitto, probably also mosquitto-clients)
 and uses systemctl to control it
 
 ### sudo su to be root

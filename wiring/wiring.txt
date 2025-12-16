@@ -1,0 +1,21 @@
+WEMO D1 mini microcontroller
+4 different colored LEDs
+4 momentary switches
+8 120 Ohm resistors
+
+LED long lead   = anode
+LED short lead = cathode
+
+cathode of all LEDs          -> ground
+one terminal of all switches -> ground
+
+LED1 anode -> resistor -> WEMO D0
+LED2 anode -> resistor -> WEMO D5
+LED3 anode -> resistor -> WEMO D6
+LED4 anode -> resistor -> WEMO D7
+
+SWTCH1 -> WEMO D1 -> resistor -> WEMO 3.3V
+SWTCH2 -> WEMO D2 -> resistor -> WEMO 3.3V
+SWTCH3 -> WEMO D3 -> resistor -> WEMO 3.3V
+SWTCH4 -> WEMO D4 -> resistor -> WEMO 3.3V
+

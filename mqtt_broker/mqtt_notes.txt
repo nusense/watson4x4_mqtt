@@ -1,0 +1,52 @@
+In this case both watson boxes are running on the same network
+as is a beaglebone microcomputer (as beaglebone0.local)
+
+The beaglebone has the "mosquitto" MQTT broker installed (via apt-get install mosquitto)
+and uses systemctl to control it
+
+### sudo su to be root
+
+use
+   systemctl enable mosquitto
+to get it to start on reboot
+   systemctl start mosquitto
+to start the service immediately
+
+root@beaglebone0:/home/debian# systemctl status mosquitto
+● mosquitto.service - LSB: mosquitto MQTT v3.1 message broker
+   Loaded: loaded (/etc/init.d/mosquitto; generated; vendor preset: enabled)
+   Active: active (running) since Wed 2025-11-26 09:59:52 CST; 2 weeks 5 days ago
+     Docs: man:systemd-sysv-generator(8)
+   CGroup: /system.slice/mosquitto.service
+           └─1031 /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+
+root@beaglebone0:/home/debian# cat /etc/mosquitto/mosquitto.conf
+-------
+# Place your local configuration in /etc/mosquitto/conf.d/
+#
+# A full description of the configuration file is at
+# /usr/share/doc/mosquitto/examples/mosquitto.conf.example
+pid_file /var/run/mosquitto.pid
+persistence true
+persistence_location /var/lib/mosquitto/
+log_dest file /var/log/mosquitto/mosquitto.log
+include_dir /etc/mosquitto/conf.d
+-------
+
+root@beaglebone0:/home/debian# cat /etc/mosquitto/conf.d/default.conf
+-------
+allow_anonymous false
+password_file /etc/mosquitto/passwd
+listener 1883
+-------
+
+managing passwords
+  mosquitto_passwd -c /etc/mosquitto/passwd <username>  # create/overwrite -c, prompts for password
+  mosquitto_passwd -b /etc/mosquitto/passwd <myuser2> <mysecretpassword> # add another user -b
+currently have users rhatcher and foxbuild (fox.build makerspace)
+
+
+monitor a topic hierachy (# wildcard)
+  mosquitto_sub -h localhost -v -t "rhatcher/watson/#" -u rhatcher -P <password>
+
+
